@@ -18,7 +18,7 @@ const ProductCards = () => {
     const ProductResult = response.map((response) => response.item);
     setSearchResult(ProductResult);
   }
-  // Sorting Data
+
   const [filteredData, setFilteredData] = useState([]);
   useEffect(() => {
     setFilteredData(coffeeData);
