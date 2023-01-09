@@ -9,22 +9,14 @@ import { Link } from "react-router-dom";
 const CartPage = () => {
   const { state, RemoveFromCart, loggedIn, stateLength } =
     useContext(CoffeeContext);
-
-  const subTotalPrice = state.map((elem) => {
-    return elem.Price;
-  });
-  // console.log(subTotalPrice);
-  const CountTotalPrice = (accu, initialValue) => accu + initialValue;
-  const FinalAmount = subTotalPrice.reduce(CountTotalPrice, 0);
-
-  // const Total = useMemo(() => {
-  //   let i = 0;
-  //   state.map((item) => {
-  //     let j = item.Price;
-  //     i = i + j;
-  //   });
-  //   return i;
-  // }, [state]);
+  console.log(state);
+  const Total = useMemo(() => {
+    let i = 0;
+    state.map((item) => {
+      i = i + item.Price;
+    });
+    return i;
+  }, [state]);
 
   return (
     <Container>
@@ -67,7 +59,7 @@ const CartPage = () => {
                 );
             })}
             <p>
-              SubTotal ({stateLength}) item : {FinalAmount}
+              SubTotal ({stateLength}) item : {Total}
             </p>
           </div>
         ) : (
