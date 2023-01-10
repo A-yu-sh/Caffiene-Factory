@@ -83,3 +83,13 @@
 // };
 
 // export default WishList;
+
+// import React, { useContext } from "react";
+// import { CoffeeContext } from "../../App";
+
+// const WishList = () => {
+//   const { coffeeData } = useContext(CoffeeContext);
+//   return <div>WishList</div>;
+// };
+
+// export default WishList;

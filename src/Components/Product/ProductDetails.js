@@ -22,7 +22,7 @@ const ProductDetails = () => {
   // };
   // console.log(wishItems);
   const { id } = useParams();
-  const { addToCart, loggedIn, itemAdded, coffeeData } =
+  const { addToCart, loggedIn, itemAdded, coffeeData, HandleWishList } =
     useContext(CoffeeContext);
   const [price, setPrice] = useState(15);
 
@@ -124,21 +124,12 @@ const ProductDetails = () => {
                           {" "}
                           Add To Cart
                         </button>
-                        {/* <button
-                          onClick={() => {
-                            addToWishlist(
-                              id,
-                              Name,
-                              Price,
-                              Image,
-                              Quantity,
-                              Rating
-                            );
-                          }}
+                        <button
+                          onClick={() => HandleWishList(data)}
                           className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white"
                         >
                           Add to Wishlist
-                        </button> */}
+                        </button>
                       </div>
                     ) : (
                       <div className="mt-5 flex justify-center text-2xl border-2 p-1 rounded-lg">

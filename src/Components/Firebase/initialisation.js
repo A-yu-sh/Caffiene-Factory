@@ -1,6 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, Firestore } from "firebase/firestore";
+import {
+  getFirestore,
+  Firestore,
+  setDoc,
+  doc,
+  firestore,
+} from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
@@ -36,3 +42,12 @@ export const SignInWithGoogle = () => {
 //     // console.log(user.displayName);
 //   }
 // });
+
+// export const SignInWithGoogle = () => {
+//   return db
+//     .auth()
+//     .signInWithPopup(provider)
+//     .then(async function createUserDb(userCredentials) {
+//       await setDoc(doc(db, "users", userCredentials.user.uid), { myList: [] });
+//     });
+// };

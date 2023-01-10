@@ -1,5 +1,12 @@
 import { createContext, useEffect, useState, useReducer, useMemo } from "react";
-import { collection, getDocs, doc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  doc,
+  setDoc,
+  addDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { db } from "./Components/Firebase/initialisation";
 import Home from "./Components/Home/Home";
 import { Routes, Route } from "react-router-dom";
@@ -39,9 +46,19 @@ function App() {
           email: user.email,
         });
         setLoggedIn(true);
+        const Ref = doc(db, "users", user.uid);
+        setDoc(Ref, { Items: arrayUnion() });
       } else setLoggedIn(false);
     });
   }, []);
+
+  const HandleWishList = (data) => {
+    const wishRef = doc(db, `users/${userDetails.id}`);
+    console.log(userDetails.id);
+    setDoc(wishRef, { Items: arrayUnion(data.Name) }, { merge: true }).then(
+      console.log("published")
+    );
+  };
 
   // CONTEXT CART
   const [state, dispatch] = useReducer(reducer, Initialstate);
@@ -81,6 +98,7 @@ function App() {
   // const wishListLength = useMemo(() => {
   //   return wishlist.length;
   // }, [wishlist]);
+
   // FIREBASE QUERY
   const [coffeeData, setCoffeeData] = useState();
   useEffect(() => {
@@ -102,6 +120,7 @@ function App() {
     // wishListLength,
     // addToWishlist,
     // RemoveFromWishlist,
+    HandleWishList,
     stateLength,
     addToCart,
     RemoveFromCart,
@@ -129,7 +148,7 @@ function App() {
               element={<ManageAuth />} */}
 
             <Route path="/checkout/cart" element={<CartPage />} />
-            {/* <Route path="/wishlist" element={<WishList />} /> */}
+            <Route path="/wishlist" element={<WishList />} />
           </Routes>
         </div>
       </BrowserRouter>
