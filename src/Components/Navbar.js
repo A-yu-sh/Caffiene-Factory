@@ -17,26 +17,22 @@ const NavBar = () => {
 
         <Link
           to="/"
-          className="px-8 hover:underline font-Nunito text-primary-800 decoration-secondary-800"
-        >
+          className="px-8 hover:underline font-Nunito text-primary-800 decoration-secondary-800">
           Home
         </Link>
         <Link
           to="/"
-          className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
-        >
+          className="px-8 hover:underline  text-primary-800 decoration-secondary-800">
           Secret
         </Link>
         <Link
           to="/collections/the-caffiene-factory"
-          className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
-        >
-          Shop
+          className="px-8 hover:underline  text-primary-800 decoration-secondary-800">
+          Shops
         </Link>
         <Link
           to="/checkout/cart"
-          className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
-        >
+          className="px-8 hover:underline  text-primary-800 decoration-secondary-800">
           Cart
           {loggedIn ? (
             <div className="text-sm -mt-6 ml-12">({stateLength})</div>
@@ -58,15 +54,13 @@ const NavBar = () => {
         {loggedIn ? (
           <button
             className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
-            onClick={() => signOut(auth)}
-          >
+            onClick={() => signOut(auth)}>
             {userDetails.name}
           </button>
         ) : (
           <button
             className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
-            onClick={() => SignInWithGoogle(auth)}
-          >
+            onClick={() => SignInWithGoogle(auth)}>
             Login
           </button>
         )}

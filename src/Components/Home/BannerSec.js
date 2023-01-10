@@ -6,15 +6,15 @@ const BannerSec = () => {
   return (
     <div className="mt-20">
       <Container>
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 place-items-center">
           <div>
-            <img src={Image} alt="" className="h-72 w-full mt-5 rounded-lg" />
+            <img src={Image} alt="" className="h-full w-full mt-5 rounded-lg" />
           </div>
           <div>
-            <h1 className="mt-14 ml-14 text-5xl max-w-[50ch] font-Nunito text-primary-800">
+            <h2 className="mt-14 ml-14 text-6xl max-w-[50ch] font-bold font-Nunito text-primary-800">
               The Best Quality Coffee At One Place
-            </h1>
-            <p className="text-1.5xl ml-14 selection: mt-8 text-secondary-800 max-w-[75ch]">
+            </h2>
+            <p className="text-lg ml-14 selection: mt-8 text-secondary-800 max-w-[75ch]">
               Coffee quality is determined by a variety of factors, including
               the type of coffee beans used, the roast level, the brewing
               method. High-quality coffee is made with specialty-grade beans

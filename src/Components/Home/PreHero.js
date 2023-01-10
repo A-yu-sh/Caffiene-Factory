@@ -18,21 +18,21 @@ const PreHero = () => {
               Boost Your Productivity And Build Your Mood With A Perfect Cup of
               Coffee In The Morning
             </p>
+            <Link
+              to="/collections/the-caffiene-factory"
+              className="border-2 mt-8 rounded-full px-6 py-2  bg-primary-800  text-backgrnd-100  max-w-fit flex justify-center"
+            >
+              Browse Coffee
+            </Link>
           </div>
 
-          <div>
-            <img src={Image} className=" mt-32" />
+          <div className="relative mt-32">
+            <img src={Image} />
             <img
               src={BeanBack}
-              className="h-72 w-72 -mt-72  ml-[350px]  z-50 opacity-50"
+              className="h-72 w-72   absolute -right-32 bottom-0  -z-[1] opacity-50"
             />
           </div>
-          <Link
-            to="/collections/the-caffiene-factory"
-            className="border-2 rounded-3xl max-w-[25%] flex justify-center"
-          >
-            Browse Coffee
-          </Link>
         </div>
       </Container>
     </>
