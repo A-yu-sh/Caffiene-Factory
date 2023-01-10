@@ -36,22 +36,20 @@ const CartPage = () => {
                         src={item.Image}
                         className="w-40 h-40 border-2 p-2 rounded-lg"
                       />
-                      <div className="text-2xl mt-5 ml-7">${item.Price}</div>
-                      {/* <div className="text-2xl mt-5 ">{item.Name}</div> */}
-                      <div className="mr-10">
-                        {/* <button>+</button> */}
-                        {/* <div>Qty : {quantity}</div> */}
-                        {/* <button onClick={() => DecQuantity(item.id)}>-</button> */}
-                      </div>
+                      <div className="flex ml-8 mt-5">
+                        <div className="">{item.Name}</div>
+                        <div className="flex justify-center">${item.Price}</div>
+                        <div className=""></div>
 
-                      {item.Name !== "" && (
-                        <button
-                          className="border-2"
-                          onClick={() => RemoveFromCart(id)}
-                        >
-                          Remove Item
-                        </button>
-                      )}
+                        {item.Name !== "" && (
+                          <button
+                            className="border-2"
+                            onClick={() => RemoveFromCart(id)}
+                          >
+                            Remove Item
+                          </button>
+                        )}
+                      </div>
                     </section>
 
                     <hr />
@@ -59,7 +57,7 @@ const CartPage = () => {
                 );
             })}
             <p>
-              SubTotal ({stateLength}) item : {Total}
+              SubTotal ({stateLength}) item : {`$${Total}`}
             </p>
           </div>
         ) : (

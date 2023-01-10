@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, redirect } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import Container from "../Container";
 import { db } from "../Firebase/initialisation";
@@ -16,6 +16,11 @@ import ToggleAccordion from "./ToggleData";
 import PopularProducts from "./PopularProducts";
 
 const ProductDetails = () => {
+  // const [wishItems, setWishItems] = useState();
+  // const GetInfo = (item) => {
+  //   setWishItems(item);
+  // };
+  // console.log(wishItems);
   const { id } = useParams();
   const { addToCart, loggedIn, itemAdded, coffeeData } =
     useContext(CoffeeContext);
@@ -30,7 +35,7 @@ const ProductDetails = () => {
 
   useEffect(() => {
     FetchCoffeeDataFromFireStoreForProductDetails();
-  }, []);
+  }, [id]);
 
   const {
     Image,
@@ -45,15 +50,14 @@ const ProductDetails = () => {
     Quantity,
     Processing,
   } = data;
-  // const [selectedWeight, setSelectedWeight] = useState(data.Size);
-  // const HandlePrice = () => {
+  const [selectedWeight, setSelectedWeight] = useState(data.Size);
+  // const HandlePrice = () => {addToWishlist
   //   if (setSelectedWeight(data.Size[0])) return setPrice(price);
   //   if (setSelectedWeight(data.Size[1])) return setPrice((price = price * 2));
   //   if (setSelectedWeight(data.Size[2])) return setPrice((price = price * 2.5));
   //   if (setSelectedWeight(data.Size[3])) return setPrice((price = price * 3));
   //   console.log(price);
   // };
-  const notify = () => toast("Wow so easy!");
 
   return (
     <div>
@@ -91,12 +95,12 @@ const ProductDetails = () => {
                     <div className="flex gap-4">
                       {Size.map((weight, idx) => (
                         <button
-                          // className={`border-2 p-1 rounded-xl  px-4 ${
-                          //   selectedWeight === weight &&
-                          //   "bg-primary-800 text-white"
-                          // }`}
+                          className={`border-2 p-1 rounded-xl  px-4 ${
+                            selectedWeight === weight &&
+                            "bg-primary-800 text-white"
+                          }`}
                           onClick={() => {
-                            // setSelectedWeight(weight);
+                            setSelectedWeight(weight);
                             console.log(weight);
                             // HandlePrice();
                           }}
@@ -120,9 +124,21 @@ const ProductDetails = () => {
                           {" "}
                           Add To Cart
                         </button>
-                        <button className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white">
+                        {/* <button
+                          onClick={() => {
+                            addToWishlist(
+                              id,
+                              Name,
+                              Price,
+                              Image,
+                              Quantity,
+                              Rating
+                            );
+                          }}
+                          className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white"
+                        >
                           Add to Wishlist
-                        </button>
+                        </button> */}
                       </div>
                     ) : (
                       <div className="mt-5 flex justify-center text-2xl border-2 p-1 rounded-lg">

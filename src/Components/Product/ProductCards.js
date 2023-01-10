@@ -3,6 +3,7 @@ import { CoffeeContext } from "../../App";
 import Container from "../Container";
 import { Link, useParams } from "react-router-dom";
 import { AiFillStar, AiOutlineSortAscending } from "react-icons/ai";
+import { BsHeart, BsFillHeartFill } from "react-icons/bs";
 import SortIcon from "@mui/icons-material/Sort";
 
 import Fuse from "fuse.js";
@@ -11,6 +12,7 @@ import { BsSearch } from "react-icons/bs";
 const ProductCards = () => {
   const { coffeeData } = useContext(CoffeeContext);
   const [searchResult, setSearchResult] = useState([]);
+  const [clicked, setClicked] = useState(false);
   // Fuse Search
   function handleSearch(search) {
     const fuse = new Fuse(coffeeData, { keys: ["Name"] });
@@ -82,6 +84,7 @@ const ProductCards = () => {
                         <p className="text-[12px] leading-none text-primary-800 font-Nunito">
                           {elem.Size.at(0)}
                         </p>
+
                         <h1 className="text-1xl leading-none mb-3 font-Nunito mt-2">
                           {elem.Name}
                         </h1>
@@ -90,7 +93,9 @@ const ProductCards = () => {
                         </p>
                         <div className="flex gap-1 items-center mt-3 text-starPri-800 ">
                           {elem.Rating}
-                          <AiFillStar />
+                          <div>
+                            <AiFillStar />
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, Firestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { signInWithPopup, onAuthStateChanged } from "firebase/auth";
 
@@ -31,8 +31,8 @@ export const SignInWithGoogle = () => {
     });
 };
 
-auth.onAuthStateChanged((user) => {
-  if (user) {
-    // console.log(user.displayName);
-  }
-});
+// auth.onAuthStateChanged((user) => {
+//   if (user) {
+//     // console.log(user.displayName);
+//   }
+// });

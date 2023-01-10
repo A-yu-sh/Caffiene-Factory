@@ -3,7 +3,7 @@ const reducer = (state, action) => {
     // Checks if an item is already there in the cart
     const existItem = state.find((x) => x.id === action.id);
     if (existItem) {
-      alert("item already exist");
+      alert("item exist");
     } else
       return [
         // ThE Actual code to add to cart
@@ -19,6 +19,29 @@ const reducer = (state, action) => {
       ];
   }
   if (action.type === "REMOVE_FROM_CART") {
+    return state.filter((item) => item.id !== action.id);
+  }
+  if (action.type === "ADD_TO_WISHLIST") {
+    // Checks if an item is already there in the wishlist
+    const existItem = state.find((x) => x.id === action.id);
+    if (existItem) {
+      alert("item already exist");
+    } else
+      return [
+        // ThE Actual code to add to cart
+        ...state,
+
+        {
+          id: action.id,
+          Name: action.Name,
+          Price: action.Price,
+          Image: action.Image,
+          Rating: action.Rating,
+          Quantity: action.Quantity,
+        },
+      ];
+  }
+  if (action.type === "REMOVE_FROM_WISHLIST") {
     return state.filter((item) => item.id !== action.id);
   }
 

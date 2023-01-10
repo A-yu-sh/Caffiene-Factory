@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, useReducer, useMemo } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc } from "firebase/firestore";
 import { db } from "./Components/Firebase/initialisation";
 import Home from "./Components/Home/Home";
 import { Routes, Route } from "react-router-dom";
@@ -8,7 +8,7 @@ import ProductDetails from "./Components/Product/ProductDetails";
 import ProductDetailsCopy from "./Components/Product/ProductDetailsCopy";
 import { BrowserRouter } from "react-router-dom";
 import dummyData from "./dummyData";
-import ManageAuth from "./Components/Authentication/ManageAuth";
+import WishList from "./Components/Authentication/ManageAuth";
 import CartPage from "./Components/Cart/CartPage";
 import { ItemProvider } from "./Components/Cart/CartContext";
 import reducer from "./Components/Cart/CartReducer";
@@ -16,6 +16,7 @@ import { auth } from "./Components/Firebase/initialisation";
 import { onAuthStateChanged } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { async } from "@firebase/util";
 
 const Initialstate = [];
 
@@ -61,6 +62,25 @@ function App() {
   const stateLength = useMemo(() => {
     return state.length;
   }, [state]);
+  // Context WishList
+  // const [wishlist, distribute] = useReducer(reducer, Initialstate);
+  // const addToWishlist = (id, Name, Price, Image, Quantity, Rating) => {
+  //   distribute({
+  //     type: "ADD_TO_WISHLIST",
+  //     id: id,
+  //     Name: Name,
+  //     Price: Price,
+  //     Image: Image,
+  //     Rating,
+  //     Quantity: Quantity,
+  //   });
+  // };
+  // const RemoveFromWishlist = (id) => {
+  //   distribute({ type: "REMOVE_FROM_WISHLIST", id });
+  // };
+  // const wishListLength = useMemo(() => {
+  //   return wishlist.length;
+  // }, [wishlist]);
   // FIREBASE QUERY
   const [coffeeData, setCoffeeData] = useState();
   useEffect(() => {
@@ -78,6 +98,10 @@ function App() {
   const Store = {
     coffeeData,
     state,
+    // wishlist,
+    // wishListLength,
+    // addToWishlist,
+    // RemoveFromWishlist,
     stateLength,
     addToCart,
     RemoveFromCart,
@@ -105,6 +129,7 @@ function App() {
               element={<ManageAuth />} */}
 
             <Route path="/checkout/cart" element={<CartPage />} />
+            {/* <Route path="/wishlist" element={<WishList />} /> */}
           </Routes>
         </div>
       </BrowserRouter>

@@ -8,7 +8,8 @@ import { CgProfile } from "react-icons/cg";
 import { CoffeeContext } from "../App";
 
 const NavBar = () => {
-  const { loggedIn, userDetails, stateLength } = useContext(CoffeeContext);
+  const { loggedIn, userDetails, stateLength, wishListLength } =
+    useContext(CoffeeContext);
   return (
     <div>
       <div className="mt-20  font-Nunito text-xl flex justify-center ">
@@ -43,6 +44,17 @@ const NavBar = () => {
             <div></div>
           )}
         </Link>
+        {/* <Link
+          to="/wishlist"
+          className="px-8 hover:underline  text-primary-800 decoration-secondary-800"
+        >
+          Wishlist
+          {loggedIn ? (
+            <div className="text-sm -mt-6 ml-20">({wishListLength})</div>
+          ) : (
+            <div></div>
+          )}
+        </Link> */}
         {loggedIn ? (
           <button
             className="px-8 hover:underline  text-primary-800 decoration-secondary-800"

@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
 import { CoffeeContext } from "../../App";
-import { Link } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import gif from "../Assets/Coffee-Loading.gif";
 
 const PopularProducts = ({ id }) => {
   const { coffeeData } = useContext(CoffeeContext);
+
   //   useEffect(() => {}, [id]);
   return (
     <div>
