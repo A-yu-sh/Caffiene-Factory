@@ -4,8 +4,12 @@ import {
   getDocs,
   doc,
   setDoc,
+  getDoc,
   addDoc,
   arrayUnion,
+  onSnapshot,
+  updateDoc,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "./Components/Firebase/initialisation";
 import Home from "./Components/Home/Home";
@@ -15,7 +19,6 @@ import ProductDetails from "./Components/Product/ProductDetails";
 import ProductDetailsCopy from "./Components/Product/ProductDetailsCopy";
 import { BrowserRouter } from "react-router-dom";
 import dummyData from "./dummyData";
-import WishList from "./Components/Authentication/ManageAuth";
 import CartPage from "./Components/Cart/CartPage";
 import { ItemProvider } from "./Components/Cart/CartContext";
 import reducer from "./Components/Cart/CartReducer";
@@ -24,20 +27,34 @@ import { onAuthStateChanged } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { async } from "@firebase/util";
+import Wishlist from "./Components/Wishlist";
 
 const Initialstate = [];
 
 export const CoffeeContext = createContext({});
 
 function App() {
+  // FIREBASE QUERY
+  const [coffeeData, setCoffeeData] = useState();
+  useEffect(() => {
+    const FetchCoffeeDataFromFireStore = async () => {
+      const data = await getDocs(collection(db, "coffeeDatabase"));
+      const coffeContainer = data.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setCoffeeData(coffeContainer);
+    };
+    FetchCoffeeDataFromFireStore();
+  }, []);
+
   // Context Auth
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userDetails, setUserDetails] = useState({
-    id: "",
-    name: "",
-    email: "",
-  });
+  const [userDetails, setUserDetails] = useState({});
+  const [wishlistedItems, setWishlistsedItems] = useState([]);
+  const [listData, setListData] = useState([]);
   useEffect(() => {
+    let unsub = () => {};
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserDetails({
@@ -45,20 +62,47 @@ function App() {
           name: user.displayName,
           email: user.email,
         });
+        // This code makes the items array when users is logged in
         setLoggedIn(true);
         const Ref = doc(db, "users", user.uid);
-        setDoc(Ref, { Items: arrayUnion() });
+        setDoc(Ref, { Items: arrayUnion() }, { merge: true });
+        // The Code below refetches the data every time data changes
+        // Used for Displaying the data
+        const GetId = async () => {
+          const IdData = doc(db, `users`, `${user.uid}`);
+          unsub = onSnapshot(IdData, (doc) => {
+            setWishlistsedItems(doc.data().Items);
+          });
+        };
+        GetId();
       } else setLoggedIn(false);
     });
+    return () => {
+      unsub();
+    };
   }, []);
 
-  const HandleWishList = (data) => {
+  // Handles the wishlist for adding and removing data
+  const [wishlist, setWishlist] = useState([]);
+
+  const HandleWishList = (id, Name, Price, Image, Quantity, type) => {
     const wishRef = doc(db, `users/${userDetails.id}`);
-    console.log(userDetails.id);
-    setDoc(wishRef, { Items: arrayUnion(data.Name) }, { merge: true }).then(
-      console.log("published")
-    );
+    if (type === "Add") {
+      updateDoc(
+        wishRef,
+        { Items: arrayUnion({ id, Name, Price, Image, Quantity }) },
+        { merge: true }
+      ).then();
+    } else {
+      updateDoc(wishRef, {
+        Items: arrayRemove({ id, Name, Price, Image, Quantity }),
+      });
+    }
+
+    // getDatafromWishlist(id)
   };
+
+  // get data from wishlist
 
   // CONTEXT CART
   const [state, dispatch] = useReducer(reducer, Initialstate);
@@ -79,47 +123,14 @@ function App() {
   const stateLength = useMemo(() => {
     return state.length;
   }, [state]);
-  // Context WishList
-  // const [wishlist, distribute] = useReducer(reducer, Initialstate);
-  // const addToWishlist = (id, Name, Price, Image, Quantity, Rating) => {
-  //   distribute({
-  //     type: "ADD_TO_WISHLIST",
-  //     id: id,
-  //     Name: Name,
-  //     Price: Price,
-  //     Image: Image,
-  //     Rating,
-  //     Quantity: Quantity,
-  //   });
-  // };
-  // const RemoveFromWishlist = (id) => {
-  //   distribute({ type: "REMOVE_FROM_WISHLIST", id });
-  // };
-  // const wishListLength = useMemo(() => {
-  //   return wishlist.length;
-  // }, [wishlist]);
-
-  // FIREBASE QUERY
-  const [coffeeData, setCoffeeData] = useState();
-  useEffect(() => {
-    const FetchCoffeeDataFromFireStore = async () => {
-      const data = await getDocs(collection(db, "coffeeDatabase"));
-      const coffeContainer = data.docs.map((doc) => ({
-        ...doc.data(),
-        id: doc.id,
-      }));
-      setCoffeeData(coffeContainer);
-    };
-    FetchCoffeeDataFromFireStore();
-  }, []);
 
   const Store = {
     coffeeData,
     state,
-    // wishlist,
-    // wishListLength,
-    // addToWishlist,
-    // RemoveFromWishlist,
+
+    listData,
+    wishlistedItems,
+    wishlist,
     HandleWishList,
     stateLength,
     addToCart,
@@ -148,7 +159,7 @@ function App() {
               element={<ManageAuth />} */}
 
             <Route path="/checkout/cart" element={<CartPage />} />
-            <Route path="/wishlist" element={<WishList />} />
+            <Route path="/wishlist" element={<Wishlist />} />
           </Routes>
         </div>
       </BrowserRouter>
@@ -157,14 +168,3 @@ function App() {
   );
 }
 export default App;
-
-// = async () => {
-//   const data = await getDocs(collection(db, "coffeeDatabase"));
-//   const coffeContainer = data.docs.map((doc) => ({
-//     ...doc.data(),
-//     id: doc.id,
-//   }));
-//   return coffeContainer;
-// };
-// FetchCoffeeDataFromFireStore().then((res) => setCoffeeData(res));
-// console.log(coffeeData);

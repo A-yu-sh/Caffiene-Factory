@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { useParams, redirect } from "react-router-dom";
+import { useParams, redirect, Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import Container from "../Container";
 import { db } from "../Firebase/initialisation";
@@ -10,7 +10,6 @@ import gif from "../Assets/Coffee-Loading.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import PopularProduct from "./ToggleData";
-
 import { CoffeeContext } from "../../App";
 import ToggleAccordion from "./ToggleData";
 import PopularProducts from "./PopularProducts";
@@ -41,9 +40,9 @@ const ProductDetails = () => {
     Image,
     Name,
     Rating,
+    Price,
     Description,
     Size,
-    Price,
     Category,
     Origin,
     Flavour,
@@ -103,8 +102,7 @@ const ProductDetails = () => {
                             setSelectedWeight(weight);
                             console.log(weight);
                             // HandlePrice();
-                          }}
-                        >
+                          }}>
                           {weight}
                         </button>
                       ))}
@@ -119,17 +117,26 @@ const ProductDetails = () => {
                           className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white"
                           onClick={() => {
                             addToCart(id, Name, Price, Image, Quantity);
-                          }}
-                        >
+                          }}>
                           {" "}
                           Add To Cart
                         </button>
-                        <button
-                          onClick={() => HandleWishList(data)}
-                          className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white"
-                        >
-                          Add to Wishlist
-                        </button>
+                        <Link to="/wishlist">
+                          <button
+                            onClick={() =>
+                              HandleWishList(
+                                id,
+                                Name,
+                                Price,
+                                Image,
+                                Quantity,
+                                "Add"
+                              )
+                            }
+                            className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white">
+                            Add to Wishlist
+                          </button>
+                        </Link>
                       </div>
                     ) : (
                       <div className="mt-5 flex justify-center text-2xl border-2 p-1 rounded-lg">
