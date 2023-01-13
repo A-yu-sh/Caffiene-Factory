@@ -50,19 +50,25 @@ const ProductCards = () => {
   return (
     <div className="">
       <Container>
-        <input
-          type="text"
-          placeholder="Search Coffee"
-          defaultValue={""}
-          onChange={(e) => handleSearch(e.target.value)}
-          className="rounded-xl px-20 text-lg p-1 border-2 mt-14 mb-10 outline-slate-600 opacity-50"
-        ></input>
-        <button onClick={() => HandleSort("Ascending")} className="h-10 w-10">
-          <AiOutlineSortAscending />
-        </button>
-        <button onClick={() => HandleSort("Desc")} className="h-10  w-10">
-          <AiOutlineSortAscending />
-        </button>
+        <div className=" flex gap-2 items-center mt-16">
+          <input
+            type="text"
+            placeholder="Search Coffee"
+            defaultValue={""}
+            onChange={(e) => handleSearch(e.target.value)}
+            className="rounded-lg px-4 min-w-[500px] h-full p-2 border-2  text-lg outline-slate-600 opacity-50"></input>
+
+          <button
+            onClick={() => HandleSort("Ascending")}
+            className="flex justify-center border rounded-lg items-center px-4 py-2">
+            Price- Low to High
+          </button>
+          <button
+            onClick={() => HandleSort("Desc")}
+            className="flex justify-center border rounded-lg items-center px-4 py-2">
+            Price- High to Low
+          </button>
+        </div>
 
         <div className="grid grid-cols-4 gap-4 mt-8">
           {filteredData &&
@@ -71,8 +77,7 @@ const ProductCards = () => {
               return (
                 <div>
                   <Link
-                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}
-                  >
+                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}>
                     <div className="flex flex-col border-2 rounded-xl overflow-hidden border-opacity-20">
                       <div className="rounded-lg relative overflow-hidden opacity-90 ">
                         <img
@@ -108,8 +113,7 @@ const ProductCards = () => {
               return (
                 <div>
                   <Link
-                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}
-                  >
+                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}>
                     <div className="flex flex-col border-2 rounded-xl overflow-hidden border-opacity-20">
                       <div className="rounded-lg relative overflow-hidden opacity-90 ">
                         <img

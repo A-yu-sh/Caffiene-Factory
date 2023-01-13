@@ -13,22 +13,21 @@ const ToggleAccordion = () => {
   const [toggleData, SetToggleData] = useState(false);
   return (
     <div>
-      <div className="grid grid-cols-2 border-2 border-b-0 border-l-0 border-r-0 p-2">
+      <div className="grid grid-cols-2 border-2 border-b-0 border-l-0 border-r-0 p-2 py-4">
         <div className="text-xl font-Nunito">Who Are We</div>
         <div>
           <button
             onClick={() => {
               SetToggleData(!toggleData);
             }}
-            className="ml-[460px]"
-          >
+            className="ml-[460px]">
             {toggleData ? (
-              <div>
-                <MdKeyboardArrowUp />
+              <div className="w-full h-full flex justify-center items-center">
+                <MdKeyboardArrowUp className="w-6 h-6" />
               </div>
             ) : (
-              <div>
-                <MdKeyboardArrowDown />
+              <div className="w-full h-full flex justify-center items-center">
+                <MdKeyboardArrowDown className="w-6 h-6" />
               </div>
             )}
           </button>
@@ -36,7 +35,7 @@ const ToggleAccordion = () => {
       </div>
       <div className="border-2 border-t-0 border-l-0 border-r-0">
         {toggleData ? (
-          <div className="mt-5">
+          <div className="mt-5 mb-6 px-2">
             We are a team of passionate coffee enthusiasts who are dedicated to
             bringing our customers the best possible coffee experience. Our
             coffee beans are carefully sourced from the finest coffee-growing
@@ -51,22 +50,21 @@ const ToggleAccordion = () => {
         )}
       </div>
 
-      <div className=" mt-2 grid grid-cols-2 border-2 border-b-0 border-l-0 border-r-0 p-2">
+      <div className="grid grid-cols-2 border-2 border-b-0 border-t-0 border-l-0 border-r-0 p-2 py-4">
         <div className="text-xl font-Nunito">Our Shipping Policy</div>
         <div>
           <button
             onClick={() => {
               SetToggleDesc(!toggleDesc);
             }}
-            className="ml-[460px]"
-          >
+            className="ml-[460px]">
             {toggleDesc ? (
-              <div>
-                <MdKeyboardArrowUp />
+              <div className="w-full h-full flex justify-center items-center">
+                <MdKeyboardArrowUp className="w-6 h-6" />
               </div>
             ) : (
-              <div>
-                <MdKeyboardArrowDown />
+              <div className="w-full h-full flex justify-center items-center">
+                <MdKeyboardArrowDown className="w-6 h-6" />
               </div>
             )}
           </button>
@@ -74,7 +72,7 @@ const ToggleAccordion = () => {
       </div>
       <div className="border-2 border-t-0 border-l-0 border-r-0">
         {toggleDesc ? (
-          <div className="mt-5">
+          <div className="mt-5 mb-6 px-2">
             Delivery Options : We offer a variety of delivery options to meet
             your needs. These options may vary depending on your location and
             the size and weight of your order. You will be able to view

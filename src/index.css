@@ -15,3 +15,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.cart-wrapper {
+  grid-template-columns: 1.8fr 1fr;
+}

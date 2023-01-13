@@ -10,7 +10,7 @@ const TwoColumnSection = ({ heading, paragraph, image, imagePosition }) => {
         <div className=" w-full grid grid-cols-1 gap-8 md:grid-cols-2 place-items-center mt-44">
           <div>
             <div className="flex justify-start">
-              <h1 className=" text-6xl font-bold font-Nunito text-primary-800">
+              <h1 className=" text-5xl font-bold font-Nunito text-primary-800">
                 {heading}
               </h1>
             </div>
@@ -24,8 +24,7 @@ const TwoColumnSection = ({ heading, paragraph, image, imagePosition }) => {
           <div
             className={` col-start-2 ${
               imagePosition === "left" && "col-start-1"
-            } w-full h-full`}
-          >
+            } w-full h-full`}>
             <img src={image} className=" w-full rounded-lg " alt="" />
           </div>
         </div>

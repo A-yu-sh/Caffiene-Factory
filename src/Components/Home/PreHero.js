@@ -12,7 +12,7 @@ const PreHero = () => {
         <div className="grid grid-cols-2">
           <div>
             <h1 className="text-5xl mt-56  text-primary-800 font-bold font-Nunito max-w-[17ch]">
-              Enjoy Your Coffee before your activity
+              Enjoy Your Coffee Before Your Activity
             </h1>
             <p className="max-w-[37ch] text-1xl mt-10 text-primary-800 opacity-75 leading-6">
               Boost Your Productivity And Build Your Mood With A Perfect Cup of
@@ -20,8 +20,7 @@ const PreHero = () => {
             </p>
             <Link
               to="/collections/the-caffiene-factory"
-              className="border-2 mt-8 rounded-full px-6 py-2  bg-primary-800  text-backgrnd-100  max-w-fit flex justify-center"
-            >
+              className="border-2 border-primary-800 mt-8 rounded-full px-6 py-2  bg-primary-800  text-backgrnd-100  max-w-fit flex justify-center">
               Browse Coffee
             </Link>
           </div>

@@ -28,7 +28,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { async } from "@firebase/util";
 import Wishlist from "./Components/Wishlist";
-
+import "./index.css";
 const Initialstate = [];
 
 export const CoffeeContext = createContext({});
@@ -143,7 +143,7 @@ function App() {
     <CoffeeContext.Provider value={Store}>
       {/* <ItemProvider> */}
       <BrowserRouter>
-        <div className="  ">
+        <div className="text-primary-800 ">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route

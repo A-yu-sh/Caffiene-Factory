@@ -9,21 +9,14 @@ import { GiShoppingCart } from "react-icons/gi";
 import gif from "../Assets/Coffee-Loading.gif";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import PopularProduct from "./ToggleData";
 import { CoffeeContext } from "../../App";
 import ToggleAccordion from "./ToggleData";
 import PopularProducts from "./PopularProducts";
 
 const ProductDetails = () => {
-  // const [wishItems, setWishItems] = useState();
-  // const GetInfo = (item) => {
-  //   setWishItems(item);
-  // };
-  // console.log(wishItems);
   const { id } = useParams();
   const { addToCart, loggedIn, itemAdded, coffeeData, HandleWishList } =
     useContext(CoffeeContext);
-  const [price, setPrice] = useState(15);
 
   const [data, setData] = useState("");
   const FetchCoffeeDataFromFireStoreForProductDetails = async () => {
@@ -49,39 +42,64 @@ const ProductDetails = () => {
     Quantity,
     Processing,
   } = data;
-  const [selectedWeight, setSelectedWeight] = useState(data.Size);
-  // const HandlePrice = () => {addToWishlist
-  //   if (setSelectedWeight(data.Size[0])) return setPrice(price);
-  //   if (setSelectedWeight(data.Size[1])) return setPrice((price = price * 2));
-  //   if (setSelectedWeight(data.Size[2])) return setPrice((price = price * 2.5));
-  //   if (setSelectedWeight(data.Size[3])) return setPrice((price = price * 3));
-  //   console.log(price);
-  // };
+
+  const [selectedWeight, setSelectedWeight] = useState(Size);
+  const [weightedPrice, setWeightedPrice] = useState(Price);
+
+  useEffect(() => {
+    setWeightedPrice(Price);
+    setSelectedWeight(Size);
+  }, [data]);
+
+  function HandlePrice(weight) {
+    switch (weight) {
+      case "150g":
+        setWeightedPrice(Price * 1);
+        return;
+      case "300g":
+        setWeightedPrice(Price * 1.2);
+        return;
+      case "350g":
+        setWeightedPrice(Price * 1.4);
+        return;
+      case "500g":
+        setWeightedPrice(Price * 1.5);
+        return;
+      case "700g":
+        setWeightedPrice(Price * 1.6);
+        return;
+      case "750g":
+        setWeightedPrice(Price * 1.7);
+        return;
+      case "900g":
+        setWeightedPrice(Price * 2);
+        return;
+    }
+  }
 
   return (
     <div>
       {data ? (
         <div>
-          <NavBar />
           <Container>
+            <NavBar />
             <div className=" mt-40">
-              {" "}
               <div className="grid grid-cols-2">
                 <div>
                   <img src={Image} className="border-2 rounded-lg" />
                 </div>
-
                 <div>
                   <div className="font-Nunito text-3xl">{Name}</div>
-                  <div>{}</div>
-                  <div className=" flex text-[10px] gap-2">
+                  <div className=" flex text-[12px] mt-2 gap-2">
                     {Category.map((categ, idx) => (
-                      <div className="border-2 p-1 rounded-lg" key={idx}>
+                      <div className="border p-1 px-3 rounded-lg" key={idx}>
                         {categ}
                       </div>
                     ))}
                   </div>
-                  <div className="font-Nunito text-3xl mt-5">${price}</div>
+                  <div className="font-Nunito text-3xl mt-5">
+                    ${weightedPrice && weightedPrice.toFixed(2)}
+                  </div>
 
                   <div className="flex">
                     {Rating}
@@ -91,17 +109,16 @@ const ProductDetails = () => {
                   </div>
                   <div className="font-Nunito text-lg mt-5">{Description}</div>
                   <div className="mt-4">
-                    <div className="flex gap-4">
+                    <div className="flex gap-2">
                       {Size.map((weight, idx) => (
                         <button
                           className={`border-2 p-1 rounded-xl  px-4 ${
                             selectedWeight === weight &&
-                            "bg-primary-800 text-white"
+                            "bg-primary-800 border-primary-800 text-white"
                           }`}
                           onClick={() => {
                             setSelectedWeight(weight);
-                            console.log(weight);
-                            // HandlePrice();
+                            HandlePrice(weight);
                           }}>
                           {weight}
                         </button>
@@ -114,11 +131,10 @@ const ProductDetails = () => {
                     {loggedIn ? (
                       <div>
                         <button
-                          className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white"
+                          className="border-2 border-primary-800 flex w-full justify-center items-center mt-6 p-2 rounded-lg bg-primary-800  hover:opacity-80 text-white"
                           onClick={() => {
-                            addToCart(id, Name, Price, Image, Quantity);
+                            addToCart(id, Name, weightedPrice, Image, Quantity);
                           }}>
-                          {" "}
                           Add To Cart
                         </button>
                         <Link to="/wishlist">
@@ -133,7 +149,7 @@ const ProductDetails = () => {
                                 "Add"
                               )
                             }
-                            className="border-2 flex justify-center mt-3 p-2 px-48 rounded-lg text-1xl hover:bg-primary-800 hover:text-white">
+                            className="border-2 flex items-center w-full justify-center mt-3 p-2  rounded-lg  hover:bg-primary-800 hover:text-white">
                             Add to Wishlist
                           </button>
                         </Link>
@@ -147,22 +163,25 @@ const ProductDetails = () => {
                 </div>
               </div>
             </div>
-            <div className="border-2 mt-20 p-2 mb-10 text-xl">
+            <div className="border-2 rounded-lg mt-20 px-2 mb-10 text-lg">
               <div className="flex justify-between">
-                <div className="pl-2 m-2 w-[20%]"> Origin: </div>
-                <div className="w-full  border-l-2 pl-2 flex justify-start items-center">
+                <div className="pl-2 m-2 w-[20%] text-lg opacity-80">
+                  {" "}
+                  Origin:{" "}
+                </div>
+                <div className="w-full  border-l pl-4 py-2 flex justify-start items-center">
                   {Origin}
                 </div>
               </div>
-              <div className="flex justify-between border-t-2">
-                <div className="pl-2 m-2 w-[20%]"> Flavour: </div>
-                <div className="w-full  border-l-2 pl-2 flex justify-start items-center">
+              <div className="flex justify-between border-t">
+                <div className="pl-2 m-2 w-[20%] text-lg"> Flavour: </div>
+                <div className="w-full  border-l pl-4 py-2 flex justify-start items-center">
                   {Flavour}
                 </div>
               </div>
-              <div className="flex justify-between border-t-2">
-                <div className="pl-2 m-2 w-[20%]"> Processing </div>
-                <div className="w-full  border-l-2 pl-2 flex justify-start items-center">
+              <div className="flex justify-between border-t">
+                <div className="pl-2 m-2 w-[20%] text-lg"> Processing: </div>
+                <div className="w-full  border-l pl-4  py-2 flex justify-start items-center">
                   {Processing}
                 </div>
               </div>
