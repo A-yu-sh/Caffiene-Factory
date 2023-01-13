@@ -61,7 +61,7 @@ const CartPage = () => {
                 <div className="flex justify-between  text-sm">
                   <p>{elem.Name}</p>
                   <p className="ml-auto text-primary-800 font-bold">
-                    ${elem.Price}
+                    ${elem.Price.toFixed(2)}
                   </p>
                 </div>
               ))}
