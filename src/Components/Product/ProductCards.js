@@ -79,7 +79,7 @@ const ProductCards = () => {
                   <Link
                     to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}>
                     <div className="flex flex-col border-2 rounded-xl overflow-hidden border-opacity-20">
-                      <div className="rounded-lg relative overflow-hidden opacity-90 ">
+                      <div className="w-64 h-64 rounded-lg relative overflow-hidden opacity-90 ">
                         <img
                           src={elem.Image}
                           className="w-full h-full object-cover hover:opacity-100 hover:scale-[1.1] transition-all ease-in duration-[150ms]"
