@@ -51,8 +51,7 @@ const ProductCardsCopy = () => {
           defaultValue={""}
           placeholder="Search Coffee"
           onChange={(e) => handleSearch(e.target.value)}
-          className="rounded-xl px-20 text-lg p-1 border-2 mt-14 mb-10 outline-slate-600 opacity-50"
-        ></input>
+          className="rounded-xl px-20 text-lg p-1 border-2 mt-14 mb-10 outline-slate-600 opacity-50"></input>
         <button onClick={() => handleSort("ascending")} className="h-10 w-10">
           <AiOutlineSortAscending />
         </button>
@@ -67,8 +66,7 @@ const ProductCardsCopy = () => {
               return (
                 <div>
                   <Link
-                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}
-                  >
+                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}>
                     <div className="flex flex-col border-2 rounded-xl overflow-hidden border-opacity-20">
                       <div className="rounded-lg relative overflow-hidden opacity-90 ">
                         <img
@@ -103,8 +101,7 @@ const ProductCardsCopy = () => {
               return (
                 <div>
                   <Link
-                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}
-                  >
+                    to={`/collections/the-caffiene-factory/${elem.id}/${elem.Name}/${elem.Category}`}>
                     <div className="flex flex-col border-2 rounded-xl overflow-hidden border-opacity-20">
                       <div className="rounded-lg relative overflow-hidden opacity-90 ">
                         <img

@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "../Assets/coffee-cup.jpg";
+import Image from "../Assets/pic3.jpg";
 import Container from "../Container";
 
 const PostBanner = () => {

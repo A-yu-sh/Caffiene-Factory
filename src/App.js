@@ -10,6 +10,7 @@ import {
   onSnapshot,
   updateDoc,
   arrayRemove,
+  where,
 } from "firebase/firestore";
 import { db } from "./Components/Firebase/initialisation";
 import Home from "./Components/Home/Home";
@@ -38,7 +39,7 @@ function App() {
   const [coffeeData, setCoffeeData] = useState();
   useEffect(() => {
     const FetchCoffeeDataFromFireStore = async () => {
-      const data = await getDocs(collection(db, "coffeeDatabase"));
+      const data = await getDocs(collection(db, "coffeeDatabase").where());
       const coffeContainer = data.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,

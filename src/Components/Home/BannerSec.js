@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../Container";
-import Image from "../Assets/IntroImg.jpg";
+import pic2 from "../Assets/pic2.jpg";
 
 const BannerSec = () => {
   return (
@@ -8,7 +8,7 @@ const BannerSec = () => {
       <Container>
         <div className="grid grid-cols-2 place-items-center">
           <div>
-            <img src={Image} alt="" className="h-full w-full mt-5 rounded-lg" />
+            <img src={pic2} alt="" className="h-full w-full mt-5 rounded-lg" />
           </div>
           <div>
             <h2 className="mt-14 ml-14 text-6xl max-w-[50ch] font-bold font-Nunito text-primary-800">

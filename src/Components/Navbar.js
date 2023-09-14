@@ -13,7 +13,7 @@ const NavBar = () => {
   return (
     <div>
       <div className="mt-20  font-Nunito text-xl flex justify-between items-center ">
-        <h1 className="flex text-4xl mr-auto ">ਕੈਫੀਨ</h1>
+        <h1 className="flex text-4xl mr-auto ">𝕋ℝ𝕒𝕔𝕜𝟘.𝟚</h1>
 
         <Link
           to="/"

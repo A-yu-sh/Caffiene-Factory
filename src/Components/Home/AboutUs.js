@@ -1,5 +1,5 @@
 import React from "react";
-import AboutImage from "../Assets/AboutImg.jpg";
+import pic1 from "../Assets/pic1.jpg";
 import Container from "../Container";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
@@ -8,7 +8,7 @@ const AboutUs = () => {
     <Container>
       <div className="grid grid-cols-2  mt-44">
         <div>
-          <img src={AboutImage} className="w-full h-full rounded-lg" />
+          <img src={pic1} className="w-full h-full rounded-lg" />
         </div>
         <div className="ml-14 max-w-[50ch] mt-24 font-Nunito text-1xl pb-5">
           <p>
